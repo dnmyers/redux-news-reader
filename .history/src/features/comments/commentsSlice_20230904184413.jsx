@@ -16,11 +16,14 @@ export const postCommentForArticleId = createAsyncThunk(
     'comments/postCommentForArticleId',
     async ({ articleId, comment }) => {
         const requestBody = JSON.stringify({ comment });
+        console.log("🚀 ~ file: commentsSlice.jsx:19 ~ requestBody:", requestBody)
         const response = await fetch(`api/articles/${articleId}/comments`, {
             method: 'POST',
             body: requestBody,
         });
+        console.log("🚀 ~ file: commentsSlice.jsx:22 ~ response:", response)
         const json = await response.json();
+        console.log("🚀 ~ file: commentsSlice.jsx:26 ~ json:", json)
         return json;
     }
 )
@@ -59,12 +62,8 @@ export const commentsSlice = createSlice                                        
                 state.createCommentIsPending = false;
                 state.failedToCreateComment = false;
 
-                const { articleId, ...comment } = action.payload;
-                console.log("🚀 ~ file: commentsSlice.jsx:64 ~ .addCase ~ action.payload:", action.payload)
-                console.log("🚀 ~ file: commentsSlice.jsx:64 ~ .addCase ~ articleId:", articleId)
-                console.log("🚀 ~ file: commentsSlice.jsx:64 ~ .addCase ~ comment:", comment)
+                const { articleId, comment } = action.payload;
                 const existingComments = state.byArticleId[articleId] || [];
-                console.log("🚀 ~ file: commentsSlice.jsx:66 ~ .addCase ~ existingComments:", existingComments)
                 state.byArticleId = {
                     ...state.byArticleId,
                     [articleId]: [...existingComments, comment],

@@ -59,12 +59,8 @@ export const commentsSlice = createSlice                                        
                 state.createCommentIsPending = false;
                 state.failedToCreateComment = false;
 
-                const { articleId, ...comment } = action.payload;
-                console.log("🚀 ~ file: commentsSlice.jsx:64 ~ .addCase ~ action.payload:", action.payload)
-                console.log("🚀 ~ file: commentsSlice.jsx:64 ~ .addCase ~ articleId:", articleId)
-                console.log("🚀 ~ file: commentsSlice.jsx:64 ~ .addCase ~ comment:", comment)
+                const { articleId, comment } = action.payload;
                 const existingComments = state.byArticleId[articleId] || [];
-                console.log("🚀 ~ file: commentsSlice.jsx:66 ~ .addCase ~ existingComments:", existingComments)
                 state.byArticleId = {
                     ...state.byArticleId,
                     [articleId]: [...existingComments, comment],

@@ -21,6 +21,7 @@ export const postCommentForArticleId = createAsyncThunk(
             body: requestBody,
         });
         const json = await response.json();
+        console.log("🚀 ~ file: commentsSlice.jsx:26 ~ json:", json)
         return json;
     }
 )
